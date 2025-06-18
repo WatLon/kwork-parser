@@ -1,15 +1,20 @@
 import { ChannelName } from 'src/notifications/application/ports/notification-channel.interface';
 import { INotification } from 'src/notifications/application/notifications/notification.interface';
 import { OrderApprovedEventData } from 'src/order/domain/events/order-approved.event';
-import { escapeMarkdownV2 } from 'src/shared/utils/markdown.utils';
+import {
+  escapeMarkdownV2,
+  normalizeTelegramText,
+} from 'src/shared/utils/markdown.utils';
 
 export class OrderApprovedNotification implements INotification {
   constructor(private readonly eventData: OrderApprovedEventData) {}
 
   formatFor(channelName: ChannelName): string | object {
     const notificationTitle = escapeMarkdownV2('✅ Новый одобренный заказ!');
-    const title = escapeMarkdownV2(this.eventData.title);
-    const description = escapeMarkdownV2(this.eventData.description);
+    const title = escapeMarkdownV2(normalizeTelegramText(this.eventData.title));
+    const description = escapeMarkdownV2(
+      normalizeTelegramText(this.eventData.description),
+    );
     const budget = escapeMarkdownV2(
       `${this.eventData.budget.value} ${this.eventData.budget.currency}`,
     );
