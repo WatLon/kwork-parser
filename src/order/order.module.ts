@@ -3,10 +3,10 @@ import { INJECTION_TOKENS } from 'src/shared/constants/injection-tokens';
 import { KworkParser } from './infrastructure/parsers/kwork/kwork.parser';
 import { TasksService } from './infrastructure/scheduling/tasks/task.service';
 import { IngestOrderUseCase } from './application/use-cases/ingest-order.use-case';
-import { HiringRatePolicy } from './domain/policies/hiring-rate.policy';
 import { UpdateOrderStatusOnAnalysisCompletedHandler } from './application/handlers/update-order-status-on-order-analysis-completed.handler';
 import { ApproveOrderUseCase } from './application/use-cases/approve-order.use-case';
 import { RejectOrderUseCase } from './application/use-cases/reject-order.use-case';
+import { HiringRatePolicy } from './application/policies/hiring-rate.policy';
 
 @Module({
   providers: [
