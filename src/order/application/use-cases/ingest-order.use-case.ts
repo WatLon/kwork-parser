@@ -6,7 +6,7 @@ import { INJECTION_TOKENS } from 'src/shared/constants/injection-tokens';
 import { ITransaction } from 'src/shared/domain/interfaces/transaction.interface';
 import { getErrorMessage } from 'src/shared/utils/error.utils';
 import { IEventBus } from 'src/shared/kernel/event-bus.interface';
-import { IOrderIngestionPolicy } from 'src/order/domain/policies/order-ingestion.policy';
+import { IOrderIngestionPolicy } from '../policies/order-ingestion.policy';
 
 @Injectable()
 export class IngestOrderUseCase {
@@ -43,7 +43,7 @@ export class IngestOrderUseCase {
 
           const order = orderResult.value;
 
-          if (!this.orderIngestionPolicy.isSatisfiedBy) {
+          if (!this.orderIngestionPolicy.isSatisfiedBy(order)) {
             return Result.fail('Order ingestion policy not satisfied');
           }
 
